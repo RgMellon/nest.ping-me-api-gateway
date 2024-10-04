@@ -1,14 +1,14 @@
 import { Module } from '@nestjs/common';
-import { OrderServiceModule } from './order-service/order-service.module';
 import { ProxyrmqModule } from './proxyrmq/proxyrmq.module';
 import { ConfigModule } from '@nestjs/config';
 import { ClientProxyPingMe } from './proxyrmq/client-proxy';
+import { OrderModule } from './order/order.module';
 
 @Module({
   imports: [
-    OrderServiceModule,
     ProxyrmqModule,
     ConfigModule.forRoot({ isGlobal: true }),
+    OrderModule,
   ],
   controllers: [],
   providers: [ClientProxyPingMe],
