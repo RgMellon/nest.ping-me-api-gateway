@@ -12,4 +12,8 @@ export class OrderService {
   createOrder(payload: CreateOrderDTO) {
     this.clientOrderProxy.emit('create-order', payload);
   }
+
+  async getAll() {
+    return await this.clientOrderProxy.send('get-all-orders', {}).toPromise();
+  }
 }

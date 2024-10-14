@@ -11,7 +11,6 @@ export class ClientProxyPingMe {
   constructor(private configService: ConfigService) {}
 
   public getClientOrderServiceInstance(): ClientProxy {
-    console.log(this.configService.get<string>('RABBITMQ_USER'), 'user');
     return ClientProxyFactory.create({
       transport: Transport.RMQ,
       options: {
@@ -19,6 +18,30 @@ export class ClientProxyPingMe {
           `amqp://${this.configService.get<string>('RABBITMQ_USER')}:${this.configService.get<string>('RABBITMQ_PASSWORD')}@${this.configService.get<string>('RABBITMQ_URL')}`,
         ],
         queue: 'order-service',
+      },
+    });
+  }
+
+  public getClientNotificationServiceInstance(): ClientProxy {
+    return ClientProxyFactory.create({
+      transport: Transport.RMQ,
+      options: {
+        urls: [
+          `amqp://${this.configService.get<string>('RABBITMQ_USER')}:${this.configService.get<string>('RABBITMQ_PASSWORD')}@${this.configService.get<string>('RABBITMQ_URL')}`,
+        ],
+        queue: 'notification-service',
+      },
+    });
+  }
+
+  public getClientUserServiceInstance(): ClientProxy {
+    return ClientProxyFactory.create({
+      transport: Transport.RMQ,
+      options: {
+        urls: [
+          `amqp://${this.configService.get<string>('RABBITMQ_USER')}:${this.configService.get<string>('RABBITMQ_PASSWORD')}@${this.configService.get<string>('RABBITMQ_URL')}`,
+        ],
+        queue: 'users-service',
       },
     });
   }
