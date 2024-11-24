@@ -9,7 +9,6 @@ import {
 } from '@nestjs/common';
 import { OrderService } from './order.service';
 import { CreateOrderDTO } from './dtos/create-order.dto';
-// import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { AuthGuard } from '@nestjs/passport';
 
 @Controller('api/v1/order')
